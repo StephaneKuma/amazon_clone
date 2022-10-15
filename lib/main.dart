@@ -1,17 +1,41 @@
+import 'package:amazon_clone/router.dart';
+import 'package:amazon_clone/src/providers/user_provider.dart';
+import 'package:amazon_clone/src/services/authentication_service.dart';
+import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/views/authentication_view.dart';
+import 'package:amazon_clone/src/ui/views/home_view.dart';
 import 'package:flutter/material.dart';
-
-import 'router.dart';
-import 'src/ui/helpers/constants.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AuthenticationService _authenticationService = AuthenticationService();
+
+  @override
+  void initState() {
+    super.initState();
+    _authenticationService.getCurrentUser(context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +54,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true, // can remove this line
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: const AuthenticationView(),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? const HomeView()
+          : const AuthenticationView(),
     );
   }
 }

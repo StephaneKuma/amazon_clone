@@ -1,15 +1,15 @@
-import 'package:amazon_clone/src/ui/widgets/_custom_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../enums/authentication.dart';
 import '../../services/authentication_service.dart';
 import '../helpers/constants.dart';
+import '../widgets/custom_button.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class AuthenticationView extends StatefulWidget {
-  static const String name = 'authenctication';
-
   const AuthenticationView({super.key});
+
+  static const String name = 'authenctication';
 
   @override
   State<AuthenticationView> createState() => _AuthenticationViewState();
@@ -46,10 +46,10 @@ class _AuthenticationViewState extends State<AuthenticationView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: kGreyBackgroundCOlor,
-        body: Column(
+    return Scaffold(
+      backgroundColor: kGreyBackgroundCOlor,
+      body: SafeArea(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
@@ -109,7 +109,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                         text: 'Sign Up',
                         onTap: () {
                           if (_signupFormKey.currentState!.validate()) {
-                            _authenticationService.signupUser(
+                            _authenticationService.signup(
                               context: context,
                               name: _nameController.text,
                               email: _emailController.text,
@@ -152,7 +152,6 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                         hintText: 'Email',
                         obscureText: false,
                         keyboardType: TextInputType.emailAddress,
-                        validator: (String? value) {},
                       ),
                       const SizedBox(height: 10.0),
                       CustomTextFormField(
@@ -160,12 +159,19 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                         hintText: 'Password',
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,
-                        validator: (String? value) {},
                       ),
                       const SizedBox(height: 10.0),
                       CustomButton(
                         text: 'Sign In',
-                        onTap: () {},
+                        onTap: () {
+                          if (_signinFormKey.currentState!.validate()) {
+                            _authenticationService.signin(
+                              context: context,
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

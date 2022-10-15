@@ -17,6 +17,9 @@ const Color kGreyBackgroundCOlor = Color(0xffebecee);
 Color kSelectedNavBarColor = Colors.cyan[800]!;
 const kUnselectedNavBarColor = Colors.black87;
 
+// Shared Preferences
+const String kToken = 'x-auth-token';
+
 // STATIC IMAGES
 const List<String> kCarouselImages = [
   'https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/WLA/TS/D37847648_Accessories_savingdays_Jan22_Cat_PC_1500.jpg',
