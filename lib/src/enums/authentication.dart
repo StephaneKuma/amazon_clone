@@ -1,0 +1,4 @@
+enum Authentication {
+  signin,
+  signup,
+}

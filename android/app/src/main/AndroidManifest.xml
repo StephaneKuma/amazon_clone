@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.amazone_clone">
+    package="tech.stkservices.amazon_clone">
    <application
         android:label="amazone_clone"
         android:name="${applicationName}"
