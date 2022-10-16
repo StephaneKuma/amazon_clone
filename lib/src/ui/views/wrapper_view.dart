@@ -1,4 +1,5 @@
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
+import 'package:amazon_clone/src/ui/views/account_view.dart';
 import 'package:amazon_clone/src/ui/views/home_view.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +20,7 @@ class _WrapperViewState extends State<WrapperView> {
 
   final List<Widget> _views = const <Widget>[
     HomeView(),
-    Center(
-      child: Text('Account View'),
-    ),
+    AccountView(),
     Center(
       child: Text('Cart View'),
     ),
