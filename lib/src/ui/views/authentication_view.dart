@@ -1,10 +1,9 @@
+import 'package:amazon_clone/src/enums/authentication.dart';
+import 'package:amazon_clone/src/services/authentication_service.dart';
+import 'package:amazon_clone/src/ui/helpers/constants.dart';
+import 'package:amazon_clone/src/ui/widgets/custom_button.dart';
+import 'package:amazon_clone/src/ui/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
-
-import '../../enums/authentication.dart';
-import '../../services/authentication_service.dart';
-import '../helpers/constants.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_text_form_field.dart';
 
 class AuthenticationView extends StatefulWidget {
   const AuthenticationView({super.key});

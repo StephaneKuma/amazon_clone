@@ -1,7 +1,7 @@
+import 'package:amazon_clone/src/ui/views/authentication_view.dart';
 import 'package:amazon_clone/src/ui/views/home_view.dart';
+import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
 import 'package:flutter/material.dart';
-
-import 'src/ui/views/authentication_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -10,11 +10,19 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings: settings,
         builder: (_) => const AuthenticationView(),
       );
+
+    case WrapperView.name:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const WrapperView(),
+      );
+
     case HomeView.name:
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => const HomeView(),
       );
+
     default:
       return MaterialPageRoute(
         settings: settings,

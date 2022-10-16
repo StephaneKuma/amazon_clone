@@ -3,7 +3,7 @@ import 'package:amazon_clone/src/providers/user_provider.dart';
 import 'package:amazon_clone/src/services/authentication_service.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/views/authentication_view.dart';
-import 'package:amazon_clone/src/ui/views/home_view.dart';
+import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const HomeView()
+          ? const WrapperView()
           : const AuthenticationView(),
     );
   }

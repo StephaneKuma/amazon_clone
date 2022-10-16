@@ -2,17 +2,16 @@
 
 import 'dart:convert';
 
+import 'package:amazon_clone/src/models/user.dart';
 import 'package:amazon_clone/src/providers/user_provider.dart';
-import 'package:amazon_clone/src/ui/views/home_view.dart';
+import 'package:amazon_clone/src/ui/helpers/constants.dart';
+import 'package:amazon_clone/src/ui/helpers/functions.dart';
+import 'package:amazon_clone/src/ui/helpers/utils.dart';
+import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../models/user.dart';
-import '../ui/helpers/constants.dart';
-import '../ui/helpers/functions.dart';
-import '../ui/helpers/utils.dart';
 
 class AuthenticationService {
   void signup({
@@ -87,7 +86,7 @@ class AuthenticationService {
             );
 
             Navigator.pushNamedAndRemoveUntil(
-                context, HomeView.name, (route) => false);
+                context, WrapperView.name, (route) => false);
           });
     } catch (e) {
       showSnackBar(context: context, text: e.toString());
