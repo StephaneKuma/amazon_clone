@@ -29,6 +29,7 @@ class AuthenticationService {
         address: '',
         type: '',
         token: '',
+        cart: <dynamic>[],
       );
 
       http.Response response = await http.post(
