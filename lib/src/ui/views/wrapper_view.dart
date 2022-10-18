@@ -1,8 +1,10 @@
+import 'package:amazon_clone/src/providers/user_provider.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/views/account_view.dart';
 import 'package:amazon_clone/src/ui/views/home_view.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WrapperView extends StatefulWidget {
   const WrapperView({super.key});
@@ -34,6 +36,8 @@ class _WrapperViewState extends State<WrapperView> {
 
   @override
   Widget build(BuildContext context) {
+    final cartLength = Provider.of<UserProvider>(context).user.cart.length;
+
     return Scaffold(
       body: _views[_view],
       bottomNavigationBar: BottomNavigationBar(
@@ -87,7 +91,7 @@ class _WrapperViewState extends State<WrapperView> {
               ),
               child: Badge(
                 elevation: 0,
-                badgeContent: const Text('0'),
+                badgeContent: Text('$cartLength'),
                 badgeColor: kSecondaryColor,
                 child: const Icon(Icons.shopping_cart_outlined),
               ),

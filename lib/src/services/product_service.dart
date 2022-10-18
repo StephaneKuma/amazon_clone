@@ -201,7 +201,7 @@ class ProductService {
         },
       );
     } catch (e) {
-      showSnackBar(context: context, text:e.toString());
+      showSnackBar(context: context, text: e.toString());
     }
     return productList;
   }
@@ -265,6 +265,35 @@ class ProductService {
         onSuccess: () {
           User user = userProvider.user
               .copyWith(cart: json.decode(response.body)['cart']);
+          userProvider.setUserFromModel(user);
+        },
+      );
+    } catch (e) {
+      showSnackBar(context: context, text: e.toString());
+    }
+  }
+
+  void removeFromCart({
+    required BuildContext context,
+    required Product product,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    try {
+      http.Response res = await http.delete(
+        Uri.parse('$kUrl/api/remove-from-cart/${product.id}'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+
+      handleHttpError(
+        response: res,
+        context: context,
+        onSuccess: () {
+          User user =
+              userProvider.user.copyWith(cart: json.decode(res.body)['cart']);
           userProvider.setUserFromModel(user);
         },
       );

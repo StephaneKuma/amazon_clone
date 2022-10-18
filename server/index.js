@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
 const ordersRouter = require("./routes/orders");
 const productRouter = require("./routes/products");
+const userRouter = require("./routes/user");
 
 const DB = "mongodb://localhost:27017/amazone-clone";
 const PORT = 3000;
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(authRouter);
 app.use(productRouter);
 app.use(ordersRouter);
+app.use(userRouter);
 
 mongoose
   .connect(DB)
