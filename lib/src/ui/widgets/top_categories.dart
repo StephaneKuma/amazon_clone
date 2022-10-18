@@ -19,11 +19,11 @@ class TopCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
+      height: 60.0,
       child: ListView.builder(
         itemCount: kCategoryImages.length,
         scrollDirection: Axis.horizontal,
-        itemExtent: 75,
+        itemExtent: 75.0,
         itemBuilder: (context, index) => GestureDetector(
           onTap: () => navigateToCategoryPage(
             context: context,
@@ -32,14 +32,14 @@ class TopCategories extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(50.0),
                   child: Image.asset(
                     kCategoryImages[index]['image']!,
                     fit: BoxFit.cover,
-                    height: 40,
-                    width: 40,
+                    height: 40.0,
+                    width: 40.0,
                   ),
                 ),
               ),

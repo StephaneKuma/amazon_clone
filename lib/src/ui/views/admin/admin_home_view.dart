@@ -1,7 +1,7 @@
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/views/admin/analytics_view.dart';
-import 'package:amazon_clone/src/ui/views/admin/creaate_product_view.dart';
 import 'package:amazon_clone/src/ui/views/admin/orders_view.dart';
+import 'package:amazon_clone/src/ui/views/admin/products_view.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class _AdminScreenState extends State<AdminScreen> {
   double bottomBarBorderWidth = 5;
 
   List<Widget> views = const <Widget>[
-    CreateProductView(),
+    ProductsView(),
     AnalyticsView(),
     OrdersView(),
   ];

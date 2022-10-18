@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:amazon_clone/src/models/product.dart';
 import 'package:amazon_clone/src/models/user.dart';
@@ -6,11 +7,131 @@ import 'package:amazon_clone/src/providers/user_provider.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/helpers/functions.dart';
 import 'package:amazon_clone/src/ui/helpers/utils.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class ProductService {
+  void store({
+    required BuildContext context,
+    required String name,
+    required String description,
+    required double price,
+    required double quantity,
+    required String category,
+    required List<File> images,
+  }) async {
+    final user = Provider.of<UserProvider>(context, listen: false).user;
+
+    try {
+      final cloudinary = CloudinaryPublic('denfgaxvg', 'uszbstnu');
+      List<String> imageUrls = [];
+
+      for (int i = 0; i < images.length; i++) {
+        CloudinaryResponse cloudinaryResponse = await cloudinary.uploadFile(
+          CloudinaryFile.fromFile(images[i].path, folder: name),
+        );
+
+        imageUrls.add(cloudinaryResponse.secureUrl);
+      }
+
+      Product product = Product(
+        name: name,
+        description: description,
+        quantity: quantity,
+        images: imageUrls,
+        category: category,
+        price: price,
+      );
+
+      http.Response response = await http.post(
+        Uri.parse('$kUrl/admin/products/create'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': user.token,
+        },
+        body: product.toJson(),
+      );
+
+      handleHttpError(
+        response: response,
+        context: context,
+        onSuccess: () {
+          showSnackBar(context: context, text: 'Product Added Successfully!');
+          Navigator.pop(context);
+        },
+      );
+    } catch (e) {
+      showSnackBar(context: context, text: e.toString());
+    }
+  }
+
+  Future<List<Product>> all({required BuildContext context}) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Product> products = [];
+    try {
+      http.Response response = await http.get(
+        Uri.parse('$kUrl/admin/products'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+
+      handleHttpError(
+        response: response,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(response.body).length; i++) {
+            products.add(
+              Product.fromJson(
+                jsonEncode(
+                  jsonDecode(response.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context: context, text: e.toString());
+    }
+
+    return products;
+  }
+
+  void delete({
+    required BuildContext context,
+    required Product product,
+    required VoidCallback onSuccess,
+  }) async {
+    final user = Provider.of<UserProvider>(context, listen: false).user;
+
+    try {
+      http.Response response = await http.post(
+        Uri.parse('$kUrl/admin/products/delete'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': user.token,
+        },
+        body: jsonEncode({
+          'id': product.id,
+        }),
+      );
+
+      handleHttpError(
+        response: response,
+        context: context,
+        onSuccess: () {
+          onSuccess();
+        },
+      );
+    } catch (e) {
+      showSnackBar(context: context, text:e.toString());
+    }
+  }
+
   Future<List<Product>> allByCategory({
     required BuildContext context,
     required String category,
@@ -106,8 +227,8 @@ class ProductService {
         response: response,
         context: context,
         onSuccess: () {
-          User user =
-              userProvider.user.copyWith(cart: jsonDecode(response.body)['cart']);
+          User user = userProvider.user
+              .copyWith(cart: jsonDecode(response.body)['cart']);
           userProvider.setUserFromModel(user);
         },
       );
