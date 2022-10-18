@@ -262,11 +262,11 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                 Icons.star,
                 color: kSecondaryColor,
               ),
-              onRatingUpdate: (rating) {
+              onRatingUpdate: (double value) {
                 _productService.rate(
                   context: context,
                   product: widget.product,
-                  rating: rating,
+                  value: value,
                 );
               },
             )

@@ -11,15 +11,17 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class OrderService {
-  Future<List<Order>> fetchAllOrders(BuildContext context) async {
+  Future<List<Order>> all({required BuildContext context}) async {
     final user = Provider.of<UserProvider>(context, listen: false).user;
     List<Order> orders = <Order>[];
     try {
-      http.Response response =
-          await http.get(Uri.parse('$kUrl/admin/orders'), headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': user.token,
-      });
+      http.Response response = await http.get(
+        Uri.parse('$kUrl/api/orders'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': user.token,
+        },
+      );
 
       handleHttpError(
         response: response,
@@ -52,7 +54,7 @@ class OrderService {
 
     try {
       http.Response response = await http.post(
-        Uri.parse('$kUrl/admin/orders/change-status'),
+        Uri.parse('$kUrl/api/order/change-status'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': user.token,
@@ -79,7 +81,7 @@ class OrderService {
     int totalEarning = 0;
     try {
       http.Response response = await http.get(
-        Uri.parse('$kUrl/admin/analytics'),
+        Uri.parse('$kUrl/api/analytics'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': user.token,
@@ -94,10 +96,15 @@ class OrderService {
           totalEarning = decodedResponse['totalEarnings'];
           sales = [
             Sales(label: 'Mobiles', earning: decodedResponse['mobileEarnings']),
-            Sales(label: 'Essentials', earning: decodedResponse['essentialEarnings']),
+            Sales(
+                label: 'Essentials',
+                earning: decodedResponse['essentialEarnings']),
             Sales(label: 'Books', earning: decodedResponse['booksEarnings']),
-            Sales(label: 'Appliances', earning: decodedResponse['applianceEarnings']),
-            Sales(label: 'Fashion', earning: decodedResponse['fashionEarnings']),
+            Sales(
+                label: 'Appliances',
+                earning: decodedResponse['applianceEarnings']),
+            Sales(
+                label: 'Fashion', earning: decodedResponse['fashionEarnings']),
           ];
         },
       );

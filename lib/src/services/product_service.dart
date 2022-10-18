@@ -46,7 +46,7 @@ class ProductService {
       );
 
       http.Response response = await http.post(
-        Uri.parse('$kUrl/admin/products/create'),
+        Uri.parse('$kUrl/api/products/store'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': user.token,
@@ -72,7 +72,7 @@ class ProductService {
     List<Product> products = [];
     try {
       http.Response response = await http.get(
-        Uri.parse('$kUrl/admin/products'),
+        Uri.parse('$kUrl/api/products'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
@@ -83,11 +83,11 @@ class ProductService {
         response: response,
         context: context,
         onSuccess: () {
-          for (int i = 0; i < jsonDecode(response.body).length; i++) {
+          for (int i = 0; i < json.decode(response.body).length; i++) {
             products.add(
               Product.fromJson(
-                jsonEncode(
-                  jsonDecode(response.body)[i],
+                json.encode(
+                  json.decode(response.body)[i],
                 ),
               ),
             );
@@ -110,12 +110,12 @@ class ProductService {
 
     try {
       http.Response response = await http.post(
-        Uri.parse('$kUrl/admin/products/delete'),
+        Uri.parse('$kUrl/api/products/delete'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': user.token,
         },
-        body: jsonEncode({
+        body: json.encode({
           'id': product.id,
         }),
       );
@@ -128,7 +128,7 @@ class ProductService {
         },
       );
     } catch (e) {
-      showSnackBar(context: context, text:e.toString());
+      showSnackBar(context: context, text: e.toString());
     }
   }
 
@@ -141,7 +141,7 @@ class ProductService {
 
     try {
       http.Response response = await http.get(
-        Uri.parse('$kUrl/api/products?category=$category'),
+        Uri.parse('$kUrl/api/category/products?category=$category'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': user.token,
@@ -168,6 +168,42 @@ class ProductService {
     }
 
     return products;
+  }
+
+  Future<List<Product>> search({
+    required BuildContext context,
+    required String searchQuery,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Product> productList = [];
+    try {
+      http.Response response = await http.get(
+        Uri.parse('$kUrl/api/products/search/$searchQuery'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+
+      handleHttpError(
+        response: response,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < json.decode(response.body).length; i++) {
+            productList.add(
+              Product.fromJson(
+                json.encode(
+                  json.decode(response.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context: context, text:e.toString());
+    }
+    return productList;
   }
 
   Future<Product> dealOfTheDay({
@@ -218,7 +254,7 @@ class ProductService {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
         },
-        body: jsonEncode({
+        body: json.encode({
           'id': product.id!,
         }),
       );
@@ -228,7 +264,7 @@ class ProductService {
         context: context,
         onSuccess: () {
           User user = userProvider.user
-              .copyWith(cart: jsonDecode(response.body)['cart']);
+              .copyWith(cart: json.decode(response.body)['cart']);
           userProvider.setUserFromModel(user);
         },
       );
@@ -240,7 +276,7 @@ class ProductService {
   void rate({
     required BuildContext context,
     required Product product,
-    required double rating,
+    required double value,
   }) async {
     final user = Provider.of<UserProvider>(context, listen: false).user;
 
@@ -251,9 +287,9 @@ class ProductService {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': user.token,
         },
-        body: jsonEncode({
+        body: json.encode({
           'id': product.id!,
-          'rating': rating,
+          'value': value,
         }),
       );
 

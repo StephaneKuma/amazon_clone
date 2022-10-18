@@ -183,7 +183,7 @@ class _CreateProductViewState extends State<CreateProductView> {
                 ),
                 const SizedBox(height: 10.0),
                 CustomButton(
-                  text: 'Sell',
+                  text: 'Save',
                   onTap: () {
                     if (_productFormKey.currentState!.validate() &&
                         images.isNotEmpty) {
