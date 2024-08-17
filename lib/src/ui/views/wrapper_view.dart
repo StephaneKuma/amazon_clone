@@ -2,7 +2,7 @@ import 'package:amazon_clone/src/providers/user_provider.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/views/account_view.dart';
 import 'package:amazon_clone/src/ui/views/home_view.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -89,10 +89,12 @@ class _WrapperViewState extends State<WrapperView> {
                   ),
                 ),
               ),
-              child: Badge(
-                elevation: 0,
+              child: badges.Badge(
                 badgeContent: Text('$cartLength'),
-                badgeColor: kSecondaryColor,
+                badgeStyle: const badges.BadgeStyle(
+                  badgeColor: kSecondaryColor,
+                  elevation: 0,
+                ),
                 child: const Icon(Icons.shopping_cart_outlined),
               ),
             ),
