@@ -7,6 +7,8 @@ import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'src/ui/views/starter_view.dart';
+
 void main() {
   runApp(
     MultiProvider(
@@ -39,7 +41,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Amazon Clone',
+      title: 'Afro Stand',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: kBackgroundColor,
         colorScheme: const ColorScheme.light(
@@ -56,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
           ? const WrapperView()
-          : const AuthenticationView(),
+          : const StarterView(), // AuthenticationView
     );
   }
 }

@@ -9,6 +9,7 @@ class AuthenticationView extends StatefulWidget {
   const AuthenticationView({super.key});
 
   static const String name = 'authenctication';
+  // final String? phone; // this.phone
 
   @override
   State<AuthenticationView> createState() => _AuthenticationViewState();
@@ -46,24 +47,25 @@ class _AuthenticationViewState extends State<AuthenticationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kGreyBackgroundCOlor,
+      backgroundColor: Colors.white, // kGreyBackgroundCOlor,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Welcome',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            const Spacer(),
+            // const Text(
+            //   'Bienvenue !',
+            //   style: TextStyle(
+            //     fontSize: 22,
+            //     fontWeight: FontWeight.w500,
+            //   ),
+            // ),
             ListTile(
               tileColor: _authentication == Authentication.signup
                   ? kBackgroundColor
                   : kGreyBackgroundCOlor,
               title: const Text(
-                'Create Account',
+                'Créer un compte',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -126,7 +128,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                   ? kBackgroundColor
                   : kGreyBackgroundCOlor,
               title: const Text(
-                'Sign In',
+                'Se connecter',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -161,7 +163,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                       ),
                       const SizedBox(height: 10.0),
                       CustomButton(
-                        text: 'Sign In',
+                        text: 'Se connecter',
                         onTap: () {
                           if (_signinFormKey.currentState!.validate()) {
                             _authenticationService.signin(
@@ -176,6 +178,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                   ),
                 ),
               ),
+            const Spacer(),
           ],
         ),
       ),

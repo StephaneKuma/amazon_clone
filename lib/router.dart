@@ -1,18 +1,27 @@
-import 'package:amazon_clone/src/models/order.dart';
-import 'package:amazon_clone/src/models/product.dart';
-import 'package:amazon_clone/src/ui/views/address_view.dart';
-import 'package:amazon_clone/src/ui/views/admin/create_product_view.dart';
-import 'package:amazon_clone/src/ui/views/authentication_view.dart';
-import 'package:amazon_clone/src/ui/views/category_products_view.dart';
-import 'package:amazon_clone/src/ui/views/home_view.dart';
-import 'package:amazon_clone/src/ui/views/order_detail_view.dart';
-import 'package:amazon_clone/src/ui/views/product_detail_view.dart';
-import 'package:amazon_clone/src/ui/views/search_view.dart';
-import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
+import 'package:amazon_clone/src/ui/views/otp_view.dart';
+import 'package:amazon_clone/src/ui/views/phone_number_view.dart';
 import 'package:flutter/material.dart';
+
+import 'src/models/order.dart';
+import 'src/models/product.dart';
+import 'src/ui/views/address_view.dart';
+import 'src/ui/views/admin/create_product_view.dart';
+import 'src/ui/views/authentication_view.dart';
+import 'src/ui/views/category_products_view.dart';
+import 'src/ui/views/home_view.dart';
+import 'src/ui/views/order_detail_view.dart';
+import 'src/ui/views/product_detail_view.dart';
+import 'src/ui/views/search_view.dart';
+import 'src/ui/views/starter_view.dart';
+import 'src/ui/views/wrapper_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
+    case StarterView.name:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const StarterView(),
+      );
     case AuthenticationView.name:
       return MaterialPageRoute(
         settings: settings,
@@ -70,6 +79,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => OrderDetailView(order: order),
+      );
+
+    case PhoneNumberView.name:
+      String? phone = settings.arguments as String?;
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => PhoneNumberView(phone: phone),
+      );
+
+    case OtpView.name:
+      // String data = settings.arguments as String;
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const OtpView(),
       );
 
     default:

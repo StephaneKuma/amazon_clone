@@ -10,8 +10,8 @@ const LinearGradient kAppBarGradient = LinearGradient(
   ],
   stops: [0.5, 1.0],
 );
-
-const Color kSecondaryColor = Color.fromRGBO(255, 153, 0, 1);
+const Color kPrimaryColor = Color(0xFF291403);
+const Color kSecondaryColor = Color(0xFFfc9f12);
 const Color kBackgroundColor = Colors.white;
 const Color kGreyBackgroundCOlor = Color(0xffebecee);
 Color kSelectedNavBarColor = Colors.cyan[800]!;
