@@ -1,3 +1,4 @@
+import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -31,8 +32,8 @@ class CustomButton extends StatelessWidget {
               width: 25,
               height: 25,
               child: CircularProgressIndicator(
-                color: color,
-                backgroundColor: color!.withOpacity(.3),
+                color: color ?? kPrimaryColor,
+                backgroundColor: (color ?? kPrimaryColor).withOpacity(.3),
                 strokeWidth: 2,
               ),
             )

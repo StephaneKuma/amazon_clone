@@ -54,7 +54,7 @@ class _StarterViewState extends State<StarterView> {
             // Center Image
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Image.asset('image.jpg'),
+              child: Image.asset('assets/images/afrstnd-img.png'),
             ),
             const Spacer(),
             Padding(

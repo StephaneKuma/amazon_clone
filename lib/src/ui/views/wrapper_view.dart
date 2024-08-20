@@ -42,7 +42,7 @@ class _WrapperViewState extends State<WrapperView> {
       body: _views[_view],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _view,
-        selectedItemColor: kSelectedNavBarColor,
+        selectedItemColor: kPrimaryColor,
         unselectedItemColor: kUnselectedNavBarColor,
         backgroundColor: kBackgroundColor,
         iconSize: 28.0,
@@ -54,7 +54,7 @@ class _WrapperViewState extends State<WrapperView> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _view == 0 ? kSelectedNavBarColor : kBackgroundColor,
+                    color: _view == 0 ? kPrimaryColor : kBackgroundColor,
                     width: _bottomBarBorderWidth,
                   ),
                 ),
@@ -69,7 +69,7 @@ class _WrapperViewState extends State<WrapperView> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _view == 1 ? kSelectedNavBarColor : kBackgroundColor,
+                    color: _view == 1 ? kPrimaryColor : kBackgroundColor,
                     width: _bottomBarBorderWidth,
                   ),
                 ),
@@ -84,7 +84,7 @@ class _WrapperViewState extends State<WrapperView> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _view == 2 ? kSelectedNavBarColor : kBackgroundColor,
+                    color: _view == 2 ? kPrimaryColor : kBackgroundColor,
                     width: _bottomBarBorderWidth,
                   ),
                 ),

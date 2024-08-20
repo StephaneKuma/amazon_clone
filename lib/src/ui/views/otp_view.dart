@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
 import 'package:amazon_clone/src/ui/widgets/custom_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -207,13 +208,19 @@ class _OtpViewState extends State<OtpView> {
                   ),
                   CustomButton(
                     btnColor: kSecondaryColor,
+                    color: Colors.white,
                     isLoading: isLoading,
                     text: "Envoyer",
                     style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        WrapperView.name,
+                      );
+                    },
                     // fn: () async {
                     //   {
                     //     if (code != null) {

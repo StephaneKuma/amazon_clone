@@ -30,13 +30,14 @@ class _HomeViewState extends State<HomeView> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
         child: AppBar(
+          leading: const SizedBox(),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: kAppBarGradient,
             ),
           ),
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Expanded(
                 child: Container(
@@ -79,33 +80,33 @@ class _HomeViewState extends State<HomeView> {
                             width: 1.0,
                           ),
                         ),
-                        hintText: 'Sreach Amazon.in',
+                        hintText: 'Rechercher sur Afro Stand',
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 17.0,
+                          fontSize: 14.0,
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              Container(
-                color: Colors.transparent,
-                height: 42.0,
-                margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: const Icon(
-                  Icons.mic_outlined,
-                  color: Colors.black,
-                  size: 25.0,
-                ),
-              ),
+              // Container(
+              //   color: Colors.transparent,
+              //   height: 42.0,
+              //   margin: const EdgeInsets.symmetric(horizontal: 10.0),
+              //   child: const Icon(
+              //     Icons.mic_outlined,
+              //     color: Colors.black,
+              //     size: 25.0,
+              //   ),
+              // ),
             ],
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
-          children: const <Widget>[
+          children: <Widget>[
             AddressBox(),
             SizedBox(height: 10.0),
             TopCategories(),

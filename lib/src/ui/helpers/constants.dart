@@ -5,17 +5,22 @@ const String kUrl = "http://<ipaddress>:3000";
 // COLORS
 const LinearGradient kAppBarGradient = LinearGradient(
   colors: [
-    Color.fromARGB(255, 29, 201, 192),
-    Color.fromARGB(255, 125, 221, 216),
+    // Color.fromARGB(255, 29, 201, 192),
+    // Color.fromARGB(255, 125, 221, 216),
+    // Color(0xFF9D7A5F),
+    // Color.fromRGBO(72, 39, 13, 1),
+    // Color.fromRGBO(159, 135, 101, 1),
+
+    kGreyBackgroundCOlor, kGreyBackgroundCOlor, kGreyBackgroundCOlor
   ],
-  stops: [0.5, 1.0],
+  stops: [0.5, 1.0, 1.0],
 );
 const Color kPrimaryColor = Color(0xFF291403);
 const Color kSecondaryColor = Color(0xFFfc9f12);
 const Color kBackgroundColor = Colors.white;
 const Color kGreyBackgroundCOlor = Color(0xffebecee);
 Color kSelectedNavBarColor = Colors.cyan[800]!;
-const kUnselectedNavBarColor = Colors.black87;
+const kUnselectedNavBarColor = Colors.grey;
 
 // Shared Preferences
 const String kToken = 'x-auth-token';
