@@ -5,7 +5,7 @@ import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/helpers/utils.dart';
 import 'package:amazon_clone/src/ui/widgets/custom_button.dart';
 import 'package:amazon_clone/src/ui/widgets/custom_text_form_field.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as cs;
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
@@ -82,7 +82,7 @@ class _CreateProductViewState extends State<CreateProductView> {
               children: [
                 const SizedBox(height: 20.0),
                 images.isNotEmpty
-                    ? CarouselSlider(
+                    ? cs.CarouselSlider(
                         items: images.map(
                           (i) {
                             return Builder(
@@ -94,7 +94,7 @@ class _CreateProductViewState extends State<CreateProductView> {
                             );
                           },
                         ).toList(),
-                        options: CarouselOptions(
+                        options: cs.CarouselOptions(
                           viewportFraction: 1.0,
                           height: 200.0,
                         ),

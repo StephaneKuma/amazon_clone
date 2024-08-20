@@ -4,7 +4,7 @@ import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/views/search_view.dart';
 import 'package:amazon_clone/src/ui/widgets/custom_button.dart';
 import 'package:amazon_clone/src/ui/widgets/stars.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as cs;
 import 'package:flutter/material.dart';
 
 import 'package:amazon_clone/src/models/product.dart';
@@ -168,7 +168,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                 ),
               ),
             ),
-            CarouselSlider(
+            cs.CarouselSlider(
               items: widget.product.images.map(
                 (String image) {
                   return Builder(
@@ -180,7 +180,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   );
                 },
               ).toList(),
-              options: CarouselOptions(
+              options: cs.CarouselOptions(
                 viewportFraction: 1.0,
                 height: 300.0,
               ),
