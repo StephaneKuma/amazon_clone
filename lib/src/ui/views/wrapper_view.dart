@@ -22,10 +22,10 @@ class _WrapperViewState extends State<WrapperView> {
 
   final List<Widget> _views = const <Widget>[
     HomeView(),
-    AccountView(),
     Center(
       child: Text('Cart View'),
     ),
+    AccountView(),
   ];
 
   void changeView(int index) {
@@ -74,7 +74,14 @@ class _WrapperViewState extends State<WrapperView> {
                   ),
                 ),
               ),
-              child: const Icon(Icons.person_outline_outlined),
+              child: badges.Badge(
+                badgeContent: Text('$cartLength'),
+                badgeStyle: const badges.BadgeStyle(
+                  badgeColor: kSecondaryColor,
+                  elevation: 0,
+                ),
+                child: const Icon(Icons.shopping_cart_outlined),
+              ),
             ),
             label: '',
           ),
@@ -89,14 +96,7 @@ class _WrapperViewState extends State<WrapperView> {
                   ),
                 ),
               ),
-              child: badges.Badge(
-                badgeContent: Text('$cartLength'),
-                badgeStyle: const badges.BadgeStyle(
-                  badgeColor: kSecondaryColor,
-                  elevation: 0,
-                ),
-                child: const Icon(Icons.shopping_cart_outlined),
-              ),
+              child: const Icon(Icons.person_outline_outlined),
             ),
             label: '',
           ),

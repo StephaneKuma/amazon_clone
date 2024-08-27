@@ -55,15 +55,18 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Center(
-                    //   child: SizedBox(
-                    //     width: 200,
-                    //     child: Hero(
-                    //       tag: 'Logo',
-                    //       child: Image.asset('assets/images/logo.png'),
-                    //     ),
-                    //   ),
-                    // ),
+                    Center(
+                      child: SizedBox(
+                        width: 200,
+                        child: Hero(
+                          tag: 'Logo',
+                          child: Image.asset(
+                            'assets/images/logo.png',
+                            height: 80,
+                          ),
+                        ),
+                      ),
+                    ),
                     const SizedBox(
                       height: 60,
                     ),
@@ -132,7 +135,7 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
                       ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 25,
                     )
                   ],
                 ),

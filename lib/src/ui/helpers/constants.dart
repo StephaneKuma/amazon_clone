@@ -17,6 +17,7 @@ const LinearGradient kAppBarGradient = LinearGradient(
 );
 const Color kPrimaryColor = Color(0xFF291403);
 const Color kSecondaryColor = Color(0xFFfc9f12);
+const Color kSecondaryColor2 = Color(0xFFD38B20);
 const Color kBackgroundColor = Colors.white;
 const Color kGreyBackgroundCOlor = Color(0xffebecee);
 Color kSelectedNavBarColor = Colors.cyan[800]!;
@@ -36,23 +37,23 @@ const List<String> kCarouselImages = [
 
 const List<Map<String, String>> kCategoryImages = <Map<String, String>>[
   {
-    'title': 'Mobiles',
-    'image': 'assets/images/mobiles.jpeg',
+    'title': 'Vêtements',
+    'image': 'assets/images/cat_habit.png',
   },
   {
-    'title': 'Essentials',
-    'image': 'assets/images/essentials.jpeg',
+    'title': 'Bijoux',
+    'image': 'assets/images/cat_bijou.png',
   },
   {
-    'title': 'Appliances',
-    'image': 'assets/images/appliances.jpeg',
+    'title': 'Décorations',
+    'image': 'assets/images/cat_deco.png',
   },
   {
-    'title': 'Books',
-    'image': 'assets/images/books.jpeg',
+    'title': 'Accessoires',
+    'image': 'assets/images/cat_accessoire.png',
   },
-  {
-    'title': 'Fashion',
-    'image': 'assets/images/fashion.jpeg',
-  },
+  // {
+  //   'title': 'Fashion',
+  //   'image': 'assets/images/fashion.jpeg',
+  // },
 ];

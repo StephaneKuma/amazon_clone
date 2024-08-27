@@ -37,7 +37,8 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
 
   @override
   Widget build(BuildContext context) {
-    return product == null
+    print(product);
+    return product!.id == null
         ? const Loader()
         : product!.name.isEmpty
             ? const SizedBox()
@@ -53,11 +54,13 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
-                    Image.network(
-                      product!.images[0],
-                      height: 235,
-                      fit: BoxFit.fitHeight,
-                    ),
+                    Image.asset("assets/images/slide_1.jpg",
+                        height: 235, fit: BoxFit.fitHeight),
+                    // Image.network(
+                    //   product!.images[0],
+                    //   height: 235,
+                    //   fit: BoxFit.fitHeight,
+                    // ),
                     Container(
                       padding: const EdgeInsets.only(left: 15),
                       alignment: Alignment.topLeft,

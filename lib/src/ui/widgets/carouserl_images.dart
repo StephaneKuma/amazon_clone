@@ -11,8 +11,14 @@ class CarouselImages extends StatelessWidget {
       items: kCarouselImages
           .map(
             (String image) => Builder(
-              builder: (BuildContext context) => Image.network(
-                image,
+              builder: (BuildContext context) =>
+                  // Image.network(
+                  //   image,
+                  //   fit: BoxFit.cover,
+                  //   height: 200,
+                  // ),
+                  Image.asset(
+                "assets/images/slide_1.jpg",
                 fit: BoxFit.cover,
                 height: 200,
               ),

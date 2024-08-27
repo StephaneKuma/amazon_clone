@@ -18,39 +18,45 @@ class TopCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60.0,
-      child: ListView.builder(
-        itemCount: kCategoryImages.length,
-        scrollDirection: Axis.horizontal,
-        itemExtent: 75.0,
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () => navigateToCategoryPage(
-            context: context,
-            category: kCategoryImages[index]['title']!,
-          ),
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50.0),
-                  child: Image.asset(
-                    kCategoryImages[index]['image']!,
-                    fit: BoxFit.cover,
-                    height: 40.0,
-                    width: 40.0,
+    return Center(
+      child: SizedBox(
+        height: 130.0,
+        child: ListView.builder(
+          itemCount: kCategoryImages.length,
+          scrollDirection: Axis.horizontal,
+          itemExtent: 100.0,
+          itemBuilder: (context, index) => GestureDetector(
+            onTap: () => navigateToCategoryPage(
+              context: context,
+              category: kCategoryImages[index]['title']!,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50.0),
+                    child: Image.asset(
+                      kCategoryImages[index]['image']!,
+                      fit: BoxFit.cover,
+                      height: 80.0,
+                      width: 80.0,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                kCategoryImages[index]['title']!,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
+                SizedBox(
+                  height: 10,
                 ),
-              ),
-            ],
+                Text(
+                  kCategoryImages[index]['title']!,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

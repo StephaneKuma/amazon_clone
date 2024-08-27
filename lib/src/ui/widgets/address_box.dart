@@ -1,4 +1,5 @@
 import 'package:amazon_clone/src/providers/user_provider.dart';
+import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,12 +11,13 @@ class AddressBox extends StatelessWidget {
     final user = Provider.of<UserProvider>(context).user;
 
     return Container(
+      margin: const EdgeInsets.only(top: 10),
       height: 40,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: <Color>[
-            Color.fromARGB(255, 114, 226, 221),
-            Color.fromARGB(255, 162, 236, 233),
+            kSecondaryColor2,
+            kSecondaryColor,
           ],
           stops: [0.5, 1.0],
         ),
@@ -26,15 +28,15 @@ class AddressBox extends StatelessWidget {
           const Icon(
             Icons.location_on_outlined,
             size: 20,
+            color: Colors.white,
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Text(
-                'Delivery to ${user.name} - ${user.address}',
+                'Livrer à ${user.name} - ${user.address}',
                 style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                ),
+                    fontWeight: FontWeight.w500, color: Colors.white),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -47,6 +49,7 @@ class AddressBox extends StatelessWidget {
             child: Icon(
               Icons.arrow_drop_down_outlined,
               size: 18,
+              color: Colors.white,
             ),
           )
         ],

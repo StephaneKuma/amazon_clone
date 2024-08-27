@@ -329,6 +329,9 @@ class _OtpViewState extends State<OtpView> {
                             ],
                           ),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
