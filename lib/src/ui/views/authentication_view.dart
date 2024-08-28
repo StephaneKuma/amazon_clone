@@ -110,12 +110,12 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                         text: 'Sign Up',
                         onTap: () {
                           if (_signupFormKey.currentState!.validate()) {
-                            _authenticationService.signup(
-                              context: context,
-                              name: _nameController.text,
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            );
+                            // _authenticationService.signup(
+                            //   context: context,
+                            //   name: _nameController.text,
+                            //   email: _emailController.text,
+                            //   password: _passwordController.text,
+                            // );
                           }
                         },
                       ),
@@ -166,11 +166,11 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                         text: 'Se connecter',
                         onTap: () {
                           if (_signinFormKey.currentState!.validate()) {
-                            _authenticationService.signin(
-                              context: context,
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            );
+                            // _authenticationService.signin(
+                            //   context: context,
+                            //   email: _emailController.text,
+                            //   password: _passwordController.text,
+                            // );
                           }
                         },
                       ),

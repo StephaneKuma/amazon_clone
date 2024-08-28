@@ -1,3 +1,6 @@
+import 'package:amazon_clone/injection_container.dart';
+import 'package:amazon_clone/src/services/authentication_service.dart';
+import 'package:amazon_clone/src/ui/helpers/utils.dart';
 import 'package:amazon_clone/src/ui/views/otp_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -16,13 +19,15 @@ class PhoneNumberView extends StatefulWidget {
 
 class _PhoneNumberViewState extends State<PhoneNumberView> {
   //
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   String _phoneNumber = "";
   bool isLoading = false;
-  late final phoneController = TextEditingController();
+  final phoneController = TextEditingController();
 
   @override
   void initState() {
+    super.initState();
+
     final phone = widget.phone;
     if (phone != null) {
       final phoneWithoutCountryCode = widget.phone!.substring(4);
@@ -30,12 +35,39 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
       _phoneNumber = phone;
     }
     //
-    super.initState();
+  }
+
+  void _authenticate() async {
+    if (_formKey.currentState!.validate() && _phoneNumber.isNotEmpty) {
+      try {
+        setState(() {
+          isLoading = true;
+        });
+        final user = await locator<AuthenticationService>()
+            .authenticate(phone: _phoneNumber);
+        if (mounted) {
+          Navigator.of(context).pushNamed(OtpView.name, arguments: user);
+        }
+      } catch (e) {
+        if (mounted) {
+          showSnackBar(
+            context: context,
+            text: e.toString(),
+            type: SnackBarType.error,
+          );
+        }
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
   }
 
   @override
   void dispose() {
     phoneController.dispose();
+    super.dispose();
   }
 
   @override
@@ -111,25 +143,14 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
                             height: 30,
                           ),
                           CustomButton(
+                            isLoading: isLoading,
                             btnColor: const Color(0xFFfc9f12),
                             text: 'Valider',
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17),
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                OtpView.name,
-                              );
-                              // if (_signinFormKey.currentState!.validate()) {
-                              //   _authenticationService.signin(
-                              //     context: context,
-                              //     email: _emailController.text,
-                              //     password: _passwordController.text,
-                              //   );
-                              // }
-                            },
+                            onTap: _authenticate,
                           ),
                         ],
                       ),

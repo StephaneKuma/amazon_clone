@@ -3,10 +3,22 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-void showSnackBar({required BuildContext context, required String text}) {
+enum SnackBarType { success, error, warning }
+
+void showSnackBar({
+  required BuildContext context,
+  required String text,
+  SnackBarType type = SnackBarType.success,
+}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(text),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: switch (type) {
+        SnackBarType.success => Colors.green,
+        SnackBarType.error => Colors.red,
+        SnackBarType.warning => Colors.orange,
+      },
     ),
   );
 }

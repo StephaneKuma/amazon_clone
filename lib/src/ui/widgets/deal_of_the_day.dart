@@ -23,7 +23,7 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
   }
 
   void fetchDealOfTheDay() async {
-    product = await _productService.dealOfTheDay(context: context);
+    // product = await _productService.dealOfTheDay(context: context);
     setState(() {});
   }
 

@@ -1,3 +1,5 @@
+import 'package:amazon_clone/src/extensions/string_x.dart';
+import 'package:amazon_clone/src/providers/app_provider.dart';
 import 'package:amazon_clone/src/providers/user_provider.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,7 @@ class Greetings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context).user;
+    final user = Provider.of<AppProvider>(context).user;
 
     return Container(
         width: double.infinity,
@@ -38,27 +40,28 @@ class Greetings extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "NOM Prénoms",
-                  style: TextStyle(
+                Text(
+                  "${user?.firstName!.capitalize()} ${user?.lastName!.capitalize()}",
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const Text(
-                  "user.market@gail.com",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
+                if (user?.email != null)
+                  Text(
+                    "${user?.email}",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
                 SizedBox(
                     height: 30,
                     child: Row(
                       children: [
-                        const Text(
-                          "+228 90 00 00 00",
-                          style: TextStyle(
+                        Text(
+                          "${user?.phone}",
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
@@ -70,7 +73,9 @@ class Greetings extends StatelessWidget {
                           height: 15,
                           width: 15,
                           decoration: const BoxDecoration(
-                              color: Colors.green, shape: BoxShape.circle),
+                            color: Colors.green,
+                            shape: BoxShape.circle,
+                          ),
                         )
                       ],
                     )),

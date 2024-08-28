@@ -1,135 +1,63 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:amazon_clone/src/models/user.dart';
-import 'package:amazon_clone/src/providers/user_provider.dart';
-import 'package:amazon_clone/src/ui/helpers/constants.dart';
-import 'package:amazon_clone/src/ui/helpers/functions.dart';
-import 'package:amazon_clone/src/ui/helpers/utils.dart';
-import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:amazon_clone/injection_container.dart';
+import 'package:amazon_clone/src/extensions/http_x.dart';
+import 'package:amazon_clone/src/models/user/user.dart';
+import 'package:amazon_clone/src/services/http_service.dart';
+import 'package:amazon_clone/src/utils/constants.dart';
+import 'package:hive/hive.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class AuthenticationService {
-  void signup({
-    required BuildContext context,
-    required String name,
-    required String email,
-    required String password,
-  }) async {
+  Future<User> authenticate({required String phone}) async {
     try {
-      User user = User(
-        id: '',
-        name: name,
-        email: email,
-        password: password,
-        address: '',
-        type: '',
-        token: '',
-        cart: <dynamic>[],
+      final response = await locator<HttpService>().post(
+        path: 'authenticate',
+        body: {'phone': phone},
       );
-
-      http.Response response = await http.post(
-        Uri.parse("$kUrl/api/signup"),
-        body: user.toJson(),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-      );
-
-      handleHttpError(
-          context: context,
-          response: response,
-          onSuccess: () {
-            showSnackBar(
-              context: context,
-              text: "Account created! Login with the same credentials",
-            );
-          });
-    } catch (e) {
-      showSnackBar(context: context, text: e.toString());
+      if (response.statusCode != HttpStatus.ok) {
+        throw Exception(response.message);
+      }
+      return User.fromMap(jsonDecode(response.body)['data']);
+    } catch (e, s) {
+      print(s);
+      rethrow;
     }
   }
 
-  void signin({
-    required BuildContext context,
-    required String email,
-    required String password,
-  }) async {
+  Future<User> otpLogin({required String userId, required String otp}) async {
     try {
-      http.Response response = await http.post(
-        Uri.parse("$kUrl/api/signin"),
-        body: jsonEncode({
-          'email': email,
-          'password': password,
-        }),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-      );
-
-      handleHttpError(
-          context: context,
-          response: response,
-          onSuccess: () async {
-            SharedPreferences preferences =
-                await SharedPreferences.getInstance();
-
-            Provider.of<UserProvider>(context, listen: false)
-                .setUser(user: response.body);
-
-            await preferences.setString(
-              kToken,
-              json.decode(response.body)['token'],
-            );
-
-            Navigator.pushNamedAndRemoveUntil(
-                context, WrapperView.name, (route) => false);
-          });
+      final response = await locator<HttpService>()
+          .post(path: 'otp-login', body: {'user_id': userId, 'otp': otp});
+      if (response.statusCode != HttpStatus.ok) {
+        throw Exception(response.message);
+      }
+      await Hive.box(kAppHiveBoxKey)
+          .put(kTokenKey, jsonDecode(response.body)['token']);
+      final user = User.fromMap(jsonDecode(response.body)['data']);
+      if (user.lastName != null && user.firstName != null) {
+        await Hive.box<User>(kUserHiveBoxKey).add(user);
+      }
+      return user;
     } catch (e) {
-      showSnackBar(context: context, text: e.toString());
+      rethrow;
     }
   }
 
-  void getCurrentUser({
-    required BuildContext context,
-  }) async {
+  Future<void> resendOtp({required String userId}) async {
     try {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      String? token = preferences.getString(kToken);
-
-      if (token == null) {
-        preferences.setString(kToken, '');
-      }
-
-      http.Response response = await http.post(
-        Uri.parse('$kUrl/tokenIsValid'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          kToken: token!
-        },
+      final response = await locator<HttpService>().post(
+        path: 'otp-resend/$userId',
       );
-
-      final bool responseDecoded = json.decode(response.body);
-
-      if (responseDecoded == true) {
-        http.Response userResponse = await http.get(
-          Uri.parse('$kUrl/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            kToken: token
-          },
-        );
-
-        UserProvider userProvider =
-            Provider.of<UserProvider>(context, listen: false);
-        userProvider.setUser(user: userResponse.body);
+      if (response.statusCode != HttpStatus.ok) {
+        throw Exception(response.message);
       }
     } catch (e) {
-      showSnackBar(context: context, text: e.toString());
+      rethrow;
     }
   }
 }
