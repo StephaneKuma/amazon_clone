@@ -33,7 +33,7 @@ class _StarterViewState extends State<StarterView> {
   void _load() async {
     try {
       final user = await locator<UserService>().getUser();
-      await Future.delayed(const Duration(milliseconds: 2));
+      await Future.delayed(const Duration(milliseconds: 5));
       if (user != null && mounted) {
         Navigator.of(context)
             .pushNamedAndRemoveUntil(WrapperView.name, (_) => false);

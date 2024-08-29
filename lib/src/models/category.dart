@@ -34,7 +34,7 @@ class Category {
 
   factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
-      id: map['_id'] as String,
+      id: map['id'] as String,
       name: map['name'] as String,
       image: map['image'] as String,
     );
@@ -42,7 +42,8 @@ class Category {
 
   String toJson() => json.encode(toMap());
 
-  factory Category.fromJson(String source) => Category.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Category.fromJson(String source) =>
+      Category.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'Category(id: $id, name: $name, image: $image)';
@@ -50,11 +51,8 @@ class Category {
   @override
   bool operator ==(covariant Category other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.name == name &&
-      other.image == image;
+
+    return other.id == id && other.name == name && other.image == image;
   }
 
   @override

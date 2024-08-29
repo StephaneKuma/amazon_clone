@@ -10,7 +10,9 @@ import 'package:amazon_clone/src/ui/widgets/custom_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/app_provider.dart';
 import '../helpers/constants.dart';
 
 enum ResendingCodeStatus {
@@ -331,8 +333,12 @@ class _OtpViewState extends State<OtpView> {
           userId: widget.user.id!,
           otp: code,
         );
+        //
+        print(" User $user");
+        //
         if (user.firstName == null && user.lastName == null) {
           Navigator.pushReplacementNamed(
+            // ignore: use_build_context_synchronously
             context,
             CreateAccountView.name,
             arguments: user,
@@ -340,6 +346,8 @@ class _OtpViewState extends State<OtpView> {
           return;
         }
         if (mounted) {
+          // ignore: use_build_context_synchronously
+          context.read<AppProvider>().setUser(user);
           Navigator.pushNamedAndRemoveUntil(
             context,
             WrapperView.name,

@@ -9,6 +9,9 @@ import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
 import 'package:amazon_clone/src/ui/widgets/custom_button.dart';
 import 'package:amazon_clone/src/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/app_provider.dart';
 
 class CreateAccountView extends StatefulWidget {
   static const name = '/createAccount';
@@ -85,7 +88,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
               ),
               const SizedBox(height: 10),
               TextFormField(
-                validator: AppValidators.required,
+                // validator: AppValidators.required,
                 controller: _dateOfBirthController,
                 canRequestFocus: false,
                 onTap: _onSelectDate,
@@ -140,8 +143,12 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                         gender: gender?.name,
                       );
                       await locator<UserService>().updateUser(user: user);
+                      // ignore: use_build_context_synchronously
+                      context.read<AppProvider>().setUser(user);
+                      //
                       if (mounted) {
                         Navigator.pushNamedAndRemoveUntil(
+                          // ignore: use_build_context_synchronously
                           context,
                           WrapperView.name,
                           (route) => false,
@@ -151,6 +158,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                   } catch (e) {
                     if (mounted) {
                       showSnackBar(
+                        // ignore: use_build_context_synchronously
                         context: context,
                         text: e.toString(),
                         type: SnackBarType.error,
@@ -175,7 +183,8 @@ class _CreateAccountViewState extends State<CreateAccountView> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
-      lastDate: DateTime.now().subtract(const Duration(days: 1)),
+      lastDate: DateTime.now(),
+      // .subtract(const Duration(days: 1)),
     );
     if (date != null) {
       setState(() {

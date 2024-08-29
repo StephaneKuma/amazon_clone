@@ -43,11 +43,14 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
         setState(() {
           isLoading = true;
         });
+        print("------- 1 ");
         final user = await locator<AuthenticationService>()
             .authenticate(phone: _phoneNumber);
+        print("------- 2 ");
         if (mounted) {
           Navigator.of(context).pushNamed(OtpView.name, arguments: user);
         }
+        print("------- 3 ");
       } catch (e) {
         if (mounted) {
           showSnackBar(

@@ -12,6 +12,8 @@ class Greetings extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<AppProvider>(context).user;
 
+    print(user);
+
     return Container(
         width: double.infinity,
         decoration: const BoxDecoration(
