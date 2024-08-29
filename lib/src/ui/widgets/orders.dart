@@ -20,7 +20,7 @@ class _OrdersState extends State<Orders> {
             Container(
               padding: const EdgeInsets.only(left: 15.0),
               child: const Text(
-                'Your Orders',
+                'Mes commandes',
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w600,
@@ -30,7 +30,7 @@ class _OrdersState extends State<Orders> {
             Container(
               padding: const EdgeInsets.only(right: 15.0),
               child: Text(
-                'See All',
+                'Voir plus',
                 style: TextStyle(
                   color: kSelectedNavBarColor,
                   fontSize: 18.0,
@@ -49,8 +49,9 @@ class _OrdersState extends State<Orders> {
           ),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: kCarouselImages.hashCode,
-            itemBuilder: (context, index) => SingleProduct(image: kCarouselImages[index]),
+            itemCount: kCarouselImages.length,
+            itemBuilder: (context, index) =>
+                SingleProduct(image: kCarouselImages[index]),
           ),
         ),
       ],

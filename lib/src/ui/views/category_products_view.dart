@@ -26,7 +26,7 @@ class _CategoryProductsViewState extends State<CategoryProductsView> {
   @override
   void initState() {
     super.initState();
-    categoryProducts();
+    // categoryProducts();
   }
 
   categoryProducts() async {
@@ -57,85 +57,92 @@ class _CategoryProductsViewState extends State<CategoryProductsView> {
           ),
         ),
       ),
-      body: products == null
-          ? const Loader()
-          : Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15.0,
-                    vertical: 10.0,
-                  ),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Keep shopping for ${widget.category}',
-                    style: const TextStyle(
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 170.0,
-                  child: GridView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.only(left: 15.0),
-                    itemCount: products!.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      childAspectRatio: 1.4,
-                      mainAxisSpacing: 10.0,
-                    ),
-                    itemBuilder: (context, index) {
-                      final product = products![index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            ProductDetailView.name,
-                            arguments: product,
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 130.0,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 0.5,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Image.network(
-                                    product.images[0],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.topLeft,
-                              padding: const EdgeInsets.only(
-                                left: 0,
-                                top: 5.0,
-                                right: 15.0,
-                              ),
-                              child: Text(
-                                product.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
+      body:
+          // products == null
+          //   ? const Loader()
+          // :
+          Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15.0,
+              vertical: 10.0,
             ),
+            alignment: Alignment.topLeft,
+            child: Text(
+              'Continuer à acheter des ${widget.category}',
+              style: const TextStyle(
+                fontSize: 20.0,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 170.0,
+            child: GridView.builder(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 15.0),
+              itemCount: 10, // products!.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                childAspectRatio: 1.4,
+                mainAxisSpacing: 10.0,
+              ),
+              itemBuilder: (context, index) {
+                // final product = products![index];
+                return GestureDetector(
+                  onTap: () {
+                    // Navigator.pushNamed(
+                    //   context,
+                    //   ProductDetailView.name,
+                    //   arguments: product,
+                    // );
+                  },
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 130.0,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black12,
+                              width: 0.5,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Image.asset(
+                              "assets/images/products/image_afrostand5.jpg",
+                              // height: 235,
+                              // fit: BoxFit.fitHeight
+                            ),
+                            // Image.network(
+                            //   product.images[0],
+                            // ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding: const EdgeInsets.only(
+                          left: 0,
+                          top: 5.0,
+                          right: 15.0,
+                        ),
+                        child: Text(
+                          "Afro stand",
+                          // product.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

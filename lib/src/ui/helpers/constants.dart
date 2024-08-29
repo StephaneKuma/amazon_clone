@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-const String kUrl = "http://<ipaddress>:3000";
+const String kUrl = "https://admin.afrostand.com";
+// https://admin.afrostand.com/api/v1/categories // http://<ipaddress>:3000
 
 // COLORS
 const LinearGradient kAppBarGradient = LinearGradient(

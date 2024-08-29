@@ -27,7 +27,7 @@ class Greetings extends StatelessWidget {
               },
               child: const CircleAvatar(
                 radius: 50,
-                foregroundImage: AssetImage('assets/images/Black.png'),
+                // foregroundImage: AssetImage('assets/images/Black.png'),
               ),
             ),
             const SizedBox(

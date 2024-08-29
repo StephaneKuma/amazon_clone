@@ -23,7 +23,7 @@ class _WrapperViewState extends State<WrapperView> {
   final List<Widget> _views = const <Widget>[
     HomeView(),
     Center(
-      child: Text('Cart View'),
+      child: Text('Le panier est Vide'),
     ),
     AccountView(),
   ];

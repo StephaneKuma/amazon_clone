@@ -120,6 +120,7 @@ class _HomeViewState extends State<HomeView> {
             TopCategories(),
             SizedBox(height: 10),
             CarouselImages(),
+            SizedBox(height: 20),
             DealOfTheDay(),
           ],
         ),
