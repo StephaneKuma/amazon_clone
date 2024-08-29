@@ -46,9 +46,11 @@ class _StarterViewState extends State<StarterView> {
             // Logo
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SvgPicture.asset(
-                'assets/icons/logo.svg',
-                height: 80,
+              child: Container(
+                child: SvgPicture.asset(
+                  'assets/icons/logo.svg',
+                  height: 80,
+                ),
               ),
             ),
             const Spacer(),
