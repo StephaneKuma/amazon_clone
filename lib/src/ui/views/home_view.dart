@@ -1,3 +1,5 @@
+import 'package:amazon_clone/injection_container.dart';
+import 'package:amazon_clone/src/services/http_service.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/views/search_view.dart';
 import 'package:amazon_clone/src/ui/widgets/address_box.dart';
@@ -24,6 +26,11 @@ class _HomeViewState extends State<HomeView> {
       SearchView.name,
       arguments: query,
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override

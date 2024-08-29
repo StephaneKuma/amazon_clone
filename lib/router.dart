@@ -1,3 +1,5 @@
+import 'package:amazon_clone/src/models/user/user.dart';
+import 'package:amazon_clone/src/ui/views/create_account.dart';
 import 'package:amazon_clone/src/ui/views/otp_view.dart';
 import 'package:amazon_clone/src/ui/views/phone_number_view.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => const AuthenticationView(),
+      );
+    case CreateAccountView.name:
+      final user = settings.arguments as User;
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => CreateAccountView(
+          user: user,
+        ),
       );
 
     case WrapperView.name:
@@ -89,10 +99,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
 
     case OtpView.name:
-      // String data = settings.arguments as String;
+      final user = settings.arguments as User;
       return MaterialPageRoute(
         settings: settings,
-        builder: (_) => const OtpView(),
+        builder: (_) => OtpView(
+          user: user,
+        ),
       );
 
     default:

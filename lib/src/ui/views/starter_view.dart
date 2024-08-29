@@ -1,8 +1,16 @@
+import 'dart:async';
+
+import 'package:amazon_clone/injection_container.dart';
+import 'package:amazon_clone/src/providers/app_provider.dart';
+import 'package:amazon_clone/src/services/user_service.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/views/authentication_view.dart';
+import 'package:amazon_clone/src/ui/views/create_account.dart';
 import 'package:amazon_clone/src/ui/views/phone_number_view.dart';
+import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/custom_button.dart';
 
@@ -16,6 +24,31 @@ class StarterView extends StatefulWidget {
 }
 
 class _StarterViewState extends State<StarterView> {
+  @override
+  void initState() {
+    _load();
+    super.initState();
+  }
+
+  void _load() async {
+    try {
+      final user = await locator<UserService>().getUser();
+      await Future.delayed(const Duration(milliseconds: 2));
+      if (user != null && mounted) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(WrapperView.name, (_) => false);
+        context.read<AppProvider>().setUser(user);
+        return;
+      }
+      if (mounted) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(PhoneNumberView.name, (_) => false);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,21 +96,21 @@ class _StarterViewState extends State<StarterView> {
               height: 40,
             ),
             const Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              child: CustomButton(
-                btnColor: kPrimaryColor,
-                text: 'Authentification',
-                style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 17,
-                    color: Colors.white),
-                onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, PhoneNumberView.name, (route) => false);
-                },
-              ),
-            )
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            //   child: CustomButton(
+            //     btnColor: kPrimaryColor,
+            //     text: 'Authentification',
+            //     style: const TextStyle(
+            //         fontWeight: FontWeight.w500,
+            //         fontSize: 17,
+            //         color: Colors.white),
+            //     onTap: () {
+            //       Navigator.pushNamedAndRemoveUntil(
+            //           context, PhoneNumberView.name, (route) => false);
+            //     },
+            //   ),
+            // )
           ],
         )),
       ],
