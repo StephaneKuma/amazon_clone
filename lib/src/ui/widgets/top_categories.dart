@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../injection_container.dart';
@@ -62,12 +63,18 @@ class _TopCategoriesState extends State<TopCategories> {
   Widget build(BuildContext context) {
     return isLoading
         ? SizedBox(
-            width: 25,
-            height: 25,
-            child: CircularProgressIndicator(
-              color: kSecondaryColor,
-              backgroundColor: (kPrimaryColor).withOpacity(.3),
-              strokeWidth: 2,
+            height: 130,
+            width: double.infinity,
+            child: Center(
+              child: SizedBox(
+                width: 25,
+                height: 25,
+                child: CircularProgressIndicator(
+                  color: kSecondaryColor,
+                  backgroundColor: (kPrimaryColor).withOpacity(.3),
+                  strokeWidth: 2,
+                ),
+              ),
             ),
           )
         : Padding(
@@ -91,8 +98,8 @@ class _TopCategoriesState extends State<TopCategories> {
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(50.0),
-                            child: Image.network(
-                              categories[index].image,
+                            child: CachedNetworkImage(
+                              imageUrl: categories[index].image,
                               fit: BoxFit.cover,
                               height: 80.0,
                               width: 80.0,

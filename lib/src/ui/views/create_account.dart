@@ -180,12 +180,12 @@ class _CreateAccountViewState extends State<CreateAccountView> {
 
   _onSelectDate() async {
     final date = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-      // .subtract(const Duration(days: 1)),
-    );
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now()
+        // .subtract(const Duration(days: 1)),
+        );
     if (date != null) {
       setState(() {
         _dateOfBirthController.text = date.toIso8601String().split("T").first;
