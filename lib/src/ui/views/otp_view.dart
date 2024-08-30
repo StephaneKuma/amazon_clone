@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:amazon_clone/injection_container.dart';
 import 'package:amazon_clone/src/models/user/user.dart';
+import 'package:amazon_clone/src/providers/app_provider.dart';
 import 'package:amazon_clone/src/services/authentication_service.dart';
 import 'package:amazon_clone/src/ui/helpers/utils.dart';
 import 'package:amazon_clone/src/ui/views/create_account.dart';
@@ -10,6 +11,7 @@ import 'package:amazon_clone/src/ui/widgets/custom_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
 import '../helpers/constants.dart';
 
@@ -340,6 +342,7 @@ class _OtpViewState extends State<OtpView> {
           return;
         }
         if (mounted) {
+          context.read<AppProvider>().setUser(user);
           Navigator.pushNamedAndRemoveUntil(
             context,
             WrapperView.name,

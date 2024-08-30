@@ -1,6 +1,8 @@
 import 'package:amazon_clone/injection_container.dart';
+import 'package:amazon_clone/main.dart';
 import 'package:amazon_clone/src/enums/gender.dart';
 import 'package:amazon_clone/src/models/user/user.dart';
+import 'package:amazon_clone/src/providers/app_provider.dart';
 import 'package:amazon_clone/src/services/authentication_service.dart';
 import 'package:amazon_clone/src/services/user_service.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
@@ -9,6 +11,7 @@ import 'package:amazon_clone/src/ui/views/wrapper_view.dart';
 import 'package:amazon_clone/src/ui/widgets/custom_button.dart';
 import 'package:amazon_clone/src/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreateAccountView extends StatefulWidget {
   static const name = '/createAccount';
@@ -140,6 +143,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                         gender: gender?.name,
                       );
                       await locator<UserService>().updateUser(user: user);
+                      context.read<AppProvider>().setUser(user);
                       if (mounted) {
                         Navigator.pushNamedAndRemoveUntil(
                           context,
@@ -175,7 +179,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
-      lastDate: DateTime.now().subtract(const Duration(days: 1)),
+      lastDate: DateTime.now(),
     );
     if (date != null) {
       setState(() {

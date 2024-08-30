@@ -1,13 +1,8 @@
-import 'package:amazon_clone/src/providers/user_provider.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
-import 'package:amazon_clone/src/ui/views/address_view.dart';
-import 'package:amazon_clone/src/ui/views/search_view.dart';
-import 'package:amazon_clone/src/ui/widgets/address_box.dart';
-import 'package:amazon_clone/src/ui/widgets/cart_product.dart';
-import 'package:amazon_clone/src/ui/widgets/cart_sub_total.dart';
+import 'package:amazon_clone/src/ui/widgets/circle_container.dart';
 import 'package:amazon_clone/src/ui/widgets/custom_button.dart';
+import 'package:amazon_clone/src/ui/widgets/order_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CartView extends StatefulWidget {
   const CartView({super.key});
@@ -17,128 +12,243 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
-  void navigateToSearchView(String query) {
-    Navigator.pushNamed(context, SearchView.name, arguments: query);
-  }
-
-  void navigateToAddress(int sum) {
-    Navigator.pushNamed(
-      context,
-      AddressView.name,
-      arguments: sum.toString(),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Panier',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        actions: const [
+          CircleContainer(
+            color: kSecondaryColor,
+            size: 30,
+            child: Text(
+              "3",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          SizedBox(width: 20),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 15,
+          right: 20,
+          top: 20,
+          bottom: 10,
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.separated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 10);
+                },
+                itemCount: 3,
+                itemBuilder: (BuildContext context, int index) {
+                  return const CartItemTile();
+                },
+              ),
+            ),
+            const TotalPrice(),
+            const SizedBox(height: 5),
+            CustomButton(
+              color: kSecondaryColor,
+              btnColor: kPrimaryColor,
+              text: "Continuer",
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
     );
+  }
+}
+
+class TotalPrice extends StatelessWidget {
+  const TotalPrice({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+        left: 15,
+        right: 15,
+        top: 15,
+        bottom: 10,
+      ),
+      decoration: const BoxDecoration(
+        color: kSecondaryColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(30),
+        ),
+      ),
+      child: const Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Prix de livraison",
+                style: TextStyle(),
+              ),
+              Text(
+                "500 FCFA",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+          Divider(
+            color: Colors.black38,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Prix total",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+              ),
+              Row(
+                children: [
+                  Text(
+                    "10 000 FCFA",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CartItemTile extends StatelessWidget {
+  const CartItemTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 15,
+        vertical: 20,
+      ),
+      decoration: const BoxDecoration(
+        color: kPrimaryColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              "assets/images/cat_accessoire.png",
+              width: 80,
+              height: 80,
+            ),
+          ),
+          const SizedBox(width: 15),
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Sac en pagne",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PriceChip(),
+                    Row(
+                      children: [
+                        CircleContainer(
+                          size: 24,
+                          color: Colors.white,
+                          child: Icon(
+                            Icons.add,
+                            size: 20,
+                          ),
+                        ),
+                        SizedBox(width: 5),
+                        CircleContainer(
+                          color: kSecondaryColor,
+                          size: 40,
+                          child: Text("1"),
+                        ),
+                        SizedBox(width: 5),
+                        CircleContainer(
+                          size: 24,
+                          color: Colors.white,
+                          child: Icon(
+                            Icons.remove,
+                            size: 20,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CartItemTileProduct extends StatelessWidget {
+  const CartItemTileProduct({
+    super.key,
+  });
+
+  static List<CartItemTileProduct> list() {
+    return List.generate(3, (index) => const CartItemTileProduct());
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = context.watch<UserProvider>().user;
-    int sum = 0;
-    user.cart
-        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
-        .toList();
-
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60.0),
-        child: AppBar(
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: kAppBarGradient,
-            ),
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Container(
-                  height: 42.0,
-                  margin: const EdgeInsets.only(left: 15.0),
-                  child: Material(
-                    borderRadius: BorderRadius.circular(7.0),
-                    elevation: 1.0,
-                    child: TextFormField(
-                      onFieldSubmitted: navigateToSearchView,
-                      decoration: InputDecoration(
-                        prefixIcon: InkWell(
-                          onTap: () {},
-                          child: const Padding(
-                            padding: EdgeInsets.only(
-                              left: 6.0,
-                            ),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.black,
-                              size: 23.0,
-                            ),
-                          ),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.only(top: 10.0),
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(7.0),
-                          ),
-                          borderSide: BorderSide.none,
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(7.0),
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.black38,
-                            width: 1,
-                          ),
-                        ),
-                        hintText: 'Search Amazon.in',
-                        hintStyle: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 17.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                color: Colors.transparent,
-                height: 42.0,
-                margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: const Icon(Icons.mic, color: Colors.black, size: 25.0,),
-              ),
-            ],
-          ),
+    return Align(
+      widthFactor: 0.5,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            const AddressBox(),
-            const CartSubtotal(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomButton(
-                text: 'Proceed to Buy (${user.cart.length} items)',
-                onTap: () => navigateToAddress(sum),
-                color: Colors.yellow[600],
-              ),
-            ),
-            const SizedBox(height: 15.0),
-            Container(
-              color: Colors.black12.withOpacity(0.08),
-              height: 1,
-            ),
-            const SizedBox(height: 5),
-            ListView.builder(
-              itemCount: user.cart.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return CartProduct(
-                  index: index,
-                );
-              },
-            ),
-          ],
+        child: Image.asset(
+          "assets/images/cat_accessoire.png",
+          height: 30,
+          width: 30,
         ),
       ),
     );

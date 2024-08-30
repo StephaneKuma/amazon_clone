@@ -38,7 +38,7 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
   @override
   Widget build(BuildContext context) {
     print(product);
-    return product!.id == null
+    return product?.id == null
         ? const Loader()
         : product!.name.isEmpty
             ? const SizedBox()
