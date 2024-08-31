@@ -8,6 +8,7 @@ import 'package:amazon_clone/src/providers/user_provider.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -57,6 +58,8 @@ class _MyAppState extends State<MyApp> {
         colorScheme: const ColorScheme.light(
           primary: kSecondaryColor,
         ),
+        fontFamily: GoogleFonts.poppins().fontFamily,
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         appBarTheme: const AppBarTheme(
           elevation: 0,
           iconTheme: IconThemeData(

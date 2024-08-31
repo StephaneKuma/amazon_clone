@@ -19,7 +19,8 @@ class AuthenticationService {
         path: 'authenticate',
         body: {'phone': phone},
       );
-      if (response.statusCode != HttpStatus.ok) {
+      if (response.statusCode != HttpStatus.ok ||
+          response.statusCode != HttpStatus.created) {
         throw Exception(response.message);
       }
       return User.fromMap(jsonDecode(response.body)['data']);

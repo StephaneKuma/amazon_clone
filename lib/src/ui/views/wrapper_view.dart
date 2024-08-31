@@ -1,6 +1,7 @@
 import 'package:amazon_clone/src/providers/user_provider.dart';
 import 'package:amazon_clone/src/ui/helpers/constants.dart';
 import 'package:amazon_clone/src/ui/views/account_view.dart';
+import 'package:amazon_clone/src/ui/views/cart_view.dart';
 import 'package:amazon_clone/src/ui/views/home_view.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
@@ -22,9 +23,7 @@ class _WrapperViewState extends State<WrapperView> {
 
   final List<Widget> _views = const <Widget>[
     HomeView(),
-    Center(
-      child: Text('Le panier est Vide'),
-    ),
+    CartView(),
     AccountView(),
   ];
 
