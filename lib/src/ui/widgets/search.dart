@@ -26,7 +26,7 @@ class Search extends StatelessWidget {
               borderRadius: BorderRadius.circular(0.0),
               // elevation: 1.0,
               child: TextFormField(
-                onFieldSubmitted: navigateToSearchScreen,
+                // onFieldSubmitted: navigateToSearchScreen,
                 decoration: InputDecoration(
                   prefixIcon: InkWell(
                     onTap: () {

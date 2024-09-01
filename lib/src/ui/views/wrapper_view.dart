@@ -73,13 +73,13 @@ class _WrapperViewState extends State<WrapperView> {
                   ),
                 ),
               ),
-              child: badges.Badge(
-                badgeContent: Text('$cartLength'),
-                badgeStyle: const badges.BadgeStyle(
+              child: const badges.Badge(
+                badgeContent: Text('3'), //
+                badgeStyle: badges.BadgeStyle(
                   badgeColor: kSecondaryColor,
                   elevation: 0,
                 ),
-                child: const Icon(Icons.shopping_cart_outlined),
+                child: Icon(Icons.shopping_cart_outlined),
               ),
             ),
             label: '',

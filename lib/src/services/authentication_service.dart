@@ -19,13 +19,17 @@ class AuthenticationService {
         path: 'authenticate',
         body: {'phone': phone},
       );
-      if (response.statusCode != HttpStatus.ok ||
-          response.statusCode != HttpStatus.created) {
-        throw Exception(response.message);
-      }
-      return User.fromMap(jsonDecode(response.body)['data']);
+
+      return (response.statusCode == 200 || response.statusCode == 201)
+          ? User.fromMap(jsonDecode(response.body)['data'])
+          : throw Exception(response.message);
+      // if (response.statusCode != 200 || response.statusCode != 201) {
+      //   print("response.statusCode :  ${response.statusCode}");
+      //   throw Exception(response.message);
+      // }
+      // return User.fromMap(jsonDecode(response.body)['data']);
     } catch (e, s) {
-      print(s);
+      print("e: $e  ---  s: $s");
       rethrow;
     }
   }

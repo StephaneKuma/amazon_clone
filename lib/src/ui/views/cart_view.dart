@@ -31,7 +31,7 @@ class _CartViewState extends State<CartView> {
             child: Text(
               "3",
               style: TextStyle(
-                color: Colors.white,
+                color: kPrimaryColor,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -63,8 +63,8 @@ class _CartViewState extends State<CartView> {
             const TotalPrice(),
             const SizedBox(height: 5),
             CustomButton(
-              color: kSecondaryColor,
-              btnColor: kPrimaryColor,
+              color: Colors.white,
+              btnColor: kPrimaryColor.withOpacity(.5),
               text: "Continuer",
               onTap: () {},
             ),
@@ -153,9 +153,9 @@ class CartItemTile extends StatelessWidget {
         horizontal: 15,
         vertical: 20,
       ),
-      decoration: const BoxDecoration(
-        color: kPrimaryColor,
-        borderRadius: BorderRadius.all(
+      decoration: BoxDecoration(
+        color: kPrimaryColor.withOpacity(.4),
+        borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
       ),
@@ -177,11 +177,21 @@ class CartItemTile extends StatelessWidget {
               children: [
                 Text(
                   "Sac en pagne",
+                  maxLines: 1,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      overflow: TextOverflow.ellipsis),
+                ),
+                Text(
+                  "Sac en pagne très propre et pratique pour femme",
+                  maxLines: 1,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      overflow: TextOverflow.ellipsis),
                 ),
                 SizedBox(height: 10),
                 Row(

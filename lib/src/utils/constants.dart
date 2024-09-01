@@ -1,4 +1,4 @@
-const kBaseUrl = "https://afrostand.com";
+const kBaseUrl = "https://admin.afrostand.com";
 const kTokenKey = "token";
 const kAppHiveBoxKey = "kAppHiveBoxKey";
 const kUserHiveBoxKey = "kUserHiveBoxKey";

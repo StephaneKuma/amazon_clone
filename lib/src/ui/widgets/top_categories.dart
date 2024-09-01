@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../injection_container.dart';
 import '../../models/category.dart';
@@ -62,21 +63,64 @@ class _TopCategoriesState extends State<TopCategories> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? SizedBox(
-            height: 130,
-            width: double.infinity,
-            child: Center(
-              child: SizedBox(
-                width: 25,
-                height: 25,
-                child: CircularProgressIndicator(
-                  color: kSecondaryColor,
-                  backgroundColor: (kPrimaryColor).withOpacity(.3),
-                  strokeWidth: 2,
-                ),
-              ),
+        ? Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              height: 130,
+              child: ListView.builder(
+                  itemCount: 7,
+                  scrollDirection: Axis.horizontal,
+                  itemExtent: 100.0,
+                  itemBuilder: (context, index) => Container(
+                        margin: const EdgeInsets.all(5),
+                        child: Column(
+                          children: [
+                            Shimmer.fromColors(
+                              baseColor: Colors.grey.shade300,
+                              highlightColor: Colors.grey.shade100,
+                              child: Container(
+                                height: 80.0,
+                                width: 80.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade300,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Shimmer.fromColors(
+                              baseColor: Colors.grey.shade300,
+                              highlightColor: Colors.grey.shade100,
+                              child: Container(
+                                height: 20.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade300,
+                                  shape: BoxShape.rectangle,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
             ),
           )
+        // SizedBox(
+        //   height: 130,
+        //   width: double.infinity,
+        //   child: Center(
+        //     child: SizedBox(
+        //       width: 25,
+        //       height: 25,
+        //       child: CircularProgressIndicator(
+        //         color: kSecondaryColor,
+        //         backgroundColor: (kPrimaryColor).withOpacity(.3),
+        //         strokeWidth: 2,
+        //       ),
+        //     ),
+        //   ),
+        // )
         : Padding(
             padding: const EdgeInsets.all(10.0),
             child: Center(

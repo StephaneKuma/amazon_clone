@@ -9,9 +9,10 @@ class OrderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: kPrimaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(15)),
+      decoration: BoxDecoration(
+        color: kPrimaryColor.withOpacity(.45),
+        border: Border.all(color: kPrimaryColor.withOpacity(.5), width: 1),
+        borderRadius: const BorderRadius.all(Radius.circular(15)),
       ),
       padding: const EdgeInsets.symmetric(
         horizontal: 15,
@@ -23,20 +24,23 @@ class OrderTile extends StatelessWidget {
           const SizedBox(width: 15),
           ...OrderTileProduct.list(),
           const SizedBox(width: 25),
-          Column(
-            children: [
-              for (int i = 0; i < 3; i++)
-                Text(
-                  "Article ${i + 1}${i != 2 ? "," : ""}",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+          Expanded(
+            child: Column(
+              children: [
+                for (int i = 0; i < 3; i++)
+                  Text(
+                    "Article -- -- -- -- -- -- -- --- -- -- ${i + 1}${i != 2 ? "," : ""}",
+                    maxLines: 1,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        overflow: TextOverflow.ellipsis),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
-          const Spacer(),
+          const SizedBox(width: 10),
           Column(
             children: [
               Text(
