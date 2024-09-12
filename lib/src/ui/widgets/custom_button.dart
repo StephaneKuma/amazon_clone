@@ -6,10 +6,11 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required this.text,
     this.color,
-    this.btnColor,
+    this.btnColor = kPrimaryColor,
     this.style,
     required this.onTap,
     this.isLoading = false,
+    this.secondary = false,
   }) : super(key: key);
 
   final String text;
@@ -18,15 +19,18 @@ class CustomButton extends StatelessWidget {
   final TextStyle? style;
   final VoidCallback onTap;
   final bool isLoading;
+  final bool secondary;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 60.0),
-        backgroundColor: btnColor,
-      ),
+          minimumSize: const Size(double.infinity, 60.0),
+          backgroundColor: secondary ? null : btnColor,
+          side: BorderSide(
+            color: btnColor ?? kPrimaryColor,
+          )),
       child: isLoading
           ? SizedBox(
               width: 25,
@@ -39,6 +43,7 @@ class CustomButton extends StatelessWidget {
             )
           : Text(
               text,
+              textAlign: TextAlign.center,
               style: style ??
                   TextStyle(
                     color: color ?? Colors.black,

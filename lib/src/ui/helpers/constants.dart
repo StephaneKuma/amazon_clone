@@ -58,3 +58,9 @@ const List<Map<String, String>> kCategoryImages = <Map<String, String>>[
   //   'image': 'assets/images/fashion.jpeg',
   // },
 ];
+
+const maleAvatar =
+    "https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833546.jpg?w=826&t=st=1725017398~exp=1725017998~hmac=60bc4eacd8a1c5d343de3ef030f79e359f11bd5d346fa30198fd542f56625e88";
+
+const femaleAvatar =
+    "https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611698.jpg?w=826&t=st=1725017822~exp=1725018422~hmac=70ced823787c9203aee1d37ed0c5944844e2b5459bb34989106d907869e076fc";

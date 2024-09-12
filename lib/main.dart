@@ -62,6 +62,11 @@ class _MyAppState extends State<MyApp> {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         appBarTheme: const AppBarTheme(
           elevation: 0,
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
           iconTheme: IconThemeData(
             color: Colors.black,
           ),
@@ -78,6 +83,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
+        listTileTheme: const ListTileThemeData(contentPadding: EdgeInsets.zero),
         inputDecorationTheme: const InputDecorationTheme(
           isDense: true,
           labelStyle: TextStyle(

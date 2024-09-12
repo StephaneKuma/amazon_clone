@@ -64,7 +64,7 @@ class _CartViewState extends State<CartView> {
             const SizedBox(height: 5),
             CustomButton(
               color: Colors.white,
-              btnColor: kPrimaryColor.withOpacity(.5),
+              btnColor: kPrimaryColor,
               text: "Continuer",
               onTap: () {},
             ),
@@ -90,7 +90,7 @@ class TotalPrice extends StatelessWidget {
         bottom: 10,
       ),
       decoration: const BoxDecoration(
-        color: kSecondaryColor,
+        color: Colors.white,
         borderRadius: BorderRadius.all(
           Radius.circular(30),
         ),
@@ -153,9 +153,8 @@ class CartItemTile extends StatelessWidget {
         horizontal: 15,
         vertical: 20,
       ),
-      decoration: BoxDecoration(
-        color: kPrimaryColor.withOpacity(.4),
-        borderRadius: const BorderRadius.all(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(
           Radius.circular(15),
         ),
       ),
@@ -188,7 +187,7 @@ class CartItemTile extends StatelessWidget {
                   "Sac en pagne très propre et pratique pour femme",
                   maxLines: 1,
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
                       overflow: TextOverflow.ellipsis),

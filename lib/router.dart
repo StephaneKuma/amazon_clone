@@ -1,5 +1,6 @@
 import 'package:amazon_clone/src/models/user/user.dart';
 import 'package:amazon_clone/src/ui/views/create_account.dart';
+import 'package:amazon_clone/src/ui/views/edit_profile.dart';
 import 'package:amazon_clone/src/ui/views/otp_view.dart';
 import 'package:amazon_clone/src/ui/views/phone_number_view.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           user: user,
         ),
       );
-
+    case EditProfileView.name:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const EditProfileView(),
+      );
     default:
       return MaterialPageRoute(
         settings: settings,
